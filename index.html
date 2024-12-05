@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satoshi Terminal</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ff00;
+            font-family: monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+        .header {
+            background: #001100;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #00ff00;
+        }
+        .ascii-art {
+            font-size: 12px;
+            white-space: pre;
+            text-align: center;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.2;
+            color: #00ff00;
+        }
+        .twitter-link {
+            color: #1DA1F2;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+        }
+        .twitter-link:hover {
+            text-decoration: underline;
+        }
+        .command-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+        .cmd-btn {
+            background: #002200;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+        }
+        .output-area {
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid #00ff00;
+            background: #001100;
+            min-height: 200px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="ascii-art">
+    ____  _ __            _     
+   / __/_(_) /_________  (_)__  
+  _\ \/ / / __/ __/ __ \/ / _ \ 
+ /___/_/_/\__/_/  \___/_/\___/ 
+
+    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     
+    ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     
+       ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     
+       ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     
+       ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗
+       ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝</div>
+        <a href="https://x.com/satoshiterminal" target="_blank" class="twitter-link">twitter: x.com/satoshiterminal</a>
+    </div>
+
+    <div class="command-buttons">
+        <button class="cmd-btn" onclick="showInfo('about')">about</button>
+        <button class="cmd-btn" onclick="showInfo('genesis')">genesis</button>
+        <button class="cmd-btn" onclick="showInfo('timeline')">timeline</button>
+        <button class="cmd-btn" onclick="showInfo('quotes')">quotes</button>
+        <button class="cmd-btn" onclick="showInfo('whitepaper')">whitepaper</button>
+        <button class="cmd-btn" onclick="showInfo('early')">early-days</button>
+        <button class="cmd-btn" onclick="showInfo('mining')">mining</button>
+        <button class="cmd-btn" onclick="showInfo('legacy')">legacy</button>
+    </div>
+
+    <div id="output" class="output-area">Type 'help' to see available commands:
+
+Available commands:
+• about     - Learn about Satoshi Nakamoto
+• genesis   - View Genesis block details
+• timeline  - Bitcoin historical timeline
+• quotes    - Famous Satoshi quotes
+• whitepaper- Bitcoin whitepaper details
+• early-days- Early Bitcoin history
+• mining    - Early mining information
+• legacy    - Satoshi's impact on crypto</div>
+
+    <script>
+        const info = {
+            about: `About Satoshi Nakamoto:
+• Anonymous creator of Bitcoin
+• First Appearance: October 31, 2008
+• Last Known Contact: December 2010
+• Email: satoshi@vistomail.com (defunct)
+• Estimated Holdings: ~1 million BTC (never moved)
+• Major Achievement: Solved the double-spending problem`,
+
+            genesis: `Genesis Block Details:
+• Created: January 3, 2009
+• Reward: 50 BTC (unspendable)
+• Hash: 000000000019d6...8ce26f
+• Message embedded:
+"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"`,
+
+            timeline: `Bitcoin Historical Timeline:
+2008-10-31: Bitcoin whitepaper published
+2009-01-03: Genesis block mined
+2009-01-09: Bitcoin v0.1 released
+2009-01-12: First Bitcoin transaction
+2009-10-05: First exchange rate ($1 = 1,309.03 BTC)
+2010-05-22: Bitcoin Pizza Day (10,000 BTC)
+2010-12-12: Satoshi's last post`,
+
+            quotes: `Famous Satoshi Quotes:
+
+"The root problem with conventional currency is all the trust that's required to make it work."
+
+"The nature of Bitcoin is such that once version 0.1 was released, the core design was set in stone for the rest of its lifetime."
+
+"Banks must be trusted to hold our money and transfer it electronically, but they lend it out in waves of credit bubbles with barely a fraction in reserve."
+
+"Lost coins only make everyone else's coins worth slightly more. Think of it as a donation to everyone."`,
+
+            whitepaper: `Bitcoin Whitepaper:
+Title: "Bitcoin: A Peer-to-Peer Electronic Cash System"
+Published: October 31, 2008
+Length: 9 pages
+Citations: 8 references
+
+Key Innovations:
+• Proof-of-Work system
+• Decentralized consensus
+• Solution to double-spending
+• Trustless transactions`,
+
+            early: `Early Days of Bitcoin:
+• First Version: Bitcoin 0.1
+• First Transaction: To Hal Finney
+• First Real Purchase: Two pizzas for 10,000 BTC
+• Early Contributors: Hal Finney, Nick Szabo, Wei Dai
+• Initial Problems Solved: Mining, networking, security
+• First Exchange Rate: Less than $0.001 per BTC`,
+
+            mining: `Early Bitcoin Mining:
+• First Block: CPU mining only
+• Initial Difficulty: 1
+• First Miners: Satoshi, Hal Finney
+• Early Hardware: Standard CPUs
+• Block Reward: 50 BTC
+• Mining Software: Original Bitcoin client
+• First GPU Mining: Late 2010`,
+
+            legacy: `Satoshi's Legacy:
+• Created first successful cryptocurrency
+• Solved digital double-spending
+• Introduced blockchain technology
+• Pioneered decentralized consensus
+• Influenced thousands of other projects
+• Remained anonymous despite success
+• Never spent their bitcoin holdings`
+        };
+
+        function showInfo(cmd) {
+            const output = document.getElementById('output');
+            output.textContent = info[cmd] || 'Command not found';
+        }
+    </script>
+</body>
+</html>
